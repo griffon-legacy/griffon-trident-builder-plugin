@@ -1,5 +1,5 @@
 /*
- * Copyright 2009-2010 the original author or authors.
+ * Copyright 2009-2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,19 +18,8 @@
  * @author Andres Almiray
  */
 
-//
-// This script is executed by Griffon when the plugin is uninstalled from project.
-// Use this script if you intend to do any additional clean-up on uninstall, but
-// beware of messing up SVN directories!
-//
-
-boolean addonIsSet1
-builderConfig.each() { prefix, v ->
-    v.each { builder, views ->
-        addonIsSet1 = addonIsSet1 || 'griffon.builder.trident.TridentBuilder' == builder
-    }
-}
-
-if(addonIsSet1) {
-    builderConfigFile.text = builderConfigFile.text - "root.'griffon.builder.trident.TridentBuilder'.view = '*'\n"
+def configText = """root.'griffon.builder.trident.TridentBuilder'.view = '*'"""
+if(builderConfigFile.text.contains(configText)) {
+    println 'Removing TridentBuilder from Builder.groovy'
+    builderConfigFile.text -= configText
 }

@@ -2,17 +2,15 @@ griffon.project.dependency.resolution = {
     inherits("global")
     log "warn"
     repositories {
-        griffonPlugins()
         griffonHome()
-        griffonCentral()
-        mavenLocal()
+        mavenCentral()
         mavenRepo 'http://repository.codehaus.org'
     }
     dependencies {
-        compile('org.codehaus.griffon:tridentbuilder:0.5') {
+        compile('org.codehaus.griffon:tridentbuilder:0.6') {
             transitive = false
         }
-        compile('com.github.insubstantial:trident:6.2') { transitive = false }
+        compile('com.github.insubstantial:trident:7.0') { transitive = false }
     }
 }
 
@@ -24,5 +22,16 @@ griffon {
     }
 }
 
-griffon.jars.destDir='target/addon'
-griffon.plugin.pack.additional.sources = ['src/gdsl']
+log4j = {
+    // Example of changing the log pattern for the default console
+    // appender:
+    appenders {
+        console name: 'stdout', layout: pattern(conversionPattern: '%d [%t] %-5p %c - %m%n')
+    }
+
+    error 'org.codehaus.griffon',
+          'org.springframework',
+          'org.apache.karaf',
+          'groovyx.net'
+    warn  'griffon'
+}
