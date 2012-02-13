@@ -18,7 +18,7 @@
  * @author Andres Almiray
  */
 class TridentBuilderGriffonPlugin {
-    String version = '0.7'
+    String version = '0.8'
     // the version or versions of Griffon the plugin is designed for
     String griffonVersion = '0.9.5 > *'
     // the other plugins this plugin depends on
